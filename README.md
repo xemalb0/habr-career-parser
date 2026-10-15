@@ -6,12 +6,12 @@
 
 ## English Version
 
-An interactive command-line (CLI) web scraper designed to automate job market monitoring on the popular Eastern European tech portal, Habr Career. The script dynamically filters vacancies by title and experience level (Intern to Lead), extracts deep insights, and exports cleanly into Excel.
+An interactive command-line (CLI) web scraper designed to automate job market monitoring on the popular Eastern European tech portal, Habr Career. The script dynamically filters vacancies by title and experience level (Intern to Lead), extracts vacancy details, and exports cleanly into Excel.
 
 ### --> Key Features
-- **Anti-Bot Protection:** Integrates customized `User-Agent` HTTP headers to mimic organic browser sessions safely.
+- **Custom User-Agent Header:** Integrates customized `User-Agent` HTTP headers to mimic organic browser sessions safely.
 - **Fail-Safe & Robust Architecture:** Built-in fault tolerance handling (`if/else` fallbacks) preventing runtime exceptions when optional fields like salaries, skills, or locations are missing.
-- **Dynamic URL Compiling:** Features an interactive interactive menu to search for custom positions and filter precisely by 6 distinct experience levels.
+- **Dynamic URL Compiling:** Features an interactive menu to search for custom positions and filter precisely by 6 distinct experience levels.
 - **Automated Pagination:** Seamlessly scans through multi-page results until completion.
 - **Data Export:** Compiles dataframes using `Pandas` and saves them securely inside an isolated `/data` directory as a `.xlsx` file.
 
@@ -19,17 +19,18 @@ An interactive command-line (CLI) web scraper designed to automate job market mo
 - **Python 3**
 - **Requests** (Network communication & HTTP processing)
 - **BeautifulSoup4 (lxml)** (DOM tree navigation & parsing)
-- **Pandas** (Data engineering & Excel migration)
+- **Pandas** (Data engineering & Excel export)
 
 ### --> Installation & Usage
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com
+   git clone https://github.com/xemalb0/habr-career-parser.git
+   cd habr-career-parser
    ```
 2. Install dependencies:
    ```bash
-   pip install requests beautifulsoup4 pandas lxml openpyxl
+   pip install -r requirements.txt
    ```
 3. Run the application:
    ```bash
@@ -55,17 +56,16 @@ An interactive command-line (CLI) web scraper designed to automate job market mo
 - **Requests** (сетевые HTTP-запросы и получение кода страниц) [2]
 - **BeautifulSoup4 (lxml)** (парсинг элементов верстки сайта) [2]
 - **Pandas** (структурирование данных в DataFrame и экспорт в Excel) [2]
-- **OS / RE** (работа с операционной системой и обработка строк) [2]
 
 ### --> Инструкция по запуску
 
 1. Скачайте проект к себе на компьютер:
    ```bash
-   git clone https://github.com
+   git clone https://github.com/xemalb0/habr-career-parser.git
    ```
 2. Установите необходимые библиотеки (зависимости):
    ```bash
-   pip install requests beautifulsoup4 pandas lxml openpyxl
+   pip install -r requirements.txt
    ```
 3. Запустите парсер через консоль:
    ```bash
