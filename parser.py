@@ -23,7 +23,9 @@ print('\nAvailable Experience Levels:')
 for i, k in enumerate(QUALIFICATION):
     print(f'{i + 1}. {k}')
 
-user_index = int(input('\nEnter level number: '))
+print('\nEnter level number: ')
+user_index = int(input('> Input:'))
+print()
 value = QUALIFICATION[list(QUALIFICATION.keys())[user_index - 1]]
 
 search_link += '=' + user_search_encoded + '&' + value + 'type=all'
@@ -31,17 +33,13 @@ search_link += '=' + user_search_encoded + '&' + value + 'type=all'
 BASIC_LINK = 'https://career.habr.com' # direct link on site
 
 vacancy_list = []
-count_page = 0
+count_pages = 0
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
 
 response = requests.get(search_link, headers=headers)
 soup = BeautifulSoup(response.text, 'lxml')
 
 while True:
-
-    count_page += 1
-    print(count_page)
-
     vacancy_card_inner = soup.find_all('div', class_='vacancy-card__inner')
     for vacancy_card in vacancy_card_inner:
         data_time_class = vacancy_card.find('div', class_='vacancy-card__date')
@@ -100,7 +98,8 @@ while True:
                              'Vacancy Link': vacancy_direct_link,
                              'Company Link': vacancy_company_info_link
                             }) 
-
+    count_pages += 1
+    print(f'Page {count_pages} is Done.')
 
     nav_page_box = soup.find('a', class_='page next')
     if nav_page_box:
