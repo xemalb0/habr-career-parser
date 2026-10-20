@@ -1,5 +1,5 @@
-import os
 import pandas as pd
+import os
 
 def export_to_excel(vacancy_list, user_search):
     df = pd.DataFrame(vacancy_list)

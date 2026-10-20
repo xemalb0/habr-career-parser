@@ -1,4 +1,7 @@
 requests
+asyncio
+aiohttp
+json
 beautifulsoup4
 pandas
 openpyxl
