@@ -1,10 +1,8 @@
 import asyncio
 import aiohttp
 import time
-import requests
 from bs4 import BeautifulSoup
 import json
-import os
 
 
 BASE_URL = 'https://career.habr.com/vacancies?'
@@ -62,8 +60,10 @@ def scraping_page(html):
         vacancy_card_skill = vacancy_card.find('div', class_='vacancy-card__skills')
         if vacancy_card_skill:
             vacancy_skill_link = vacancy_card_skill.find_all('div', class_='basic-chip__text')
-            vacancy_skill_list = [skill.text for skill in vacancy_skill_link] if vacancy_skill_link else 'Нет данных'
-            vacancy_skill = ', '.join(vacancy_skill_list)
+            vacancy_skill_list = [
+            skill.text.strip() for skill in vacancy_skill_link
+            ] if vacancy_skill_link else []
+            vacancy_skill = ', '.join(vacancy_skill_list) or 'Нет данных'
         else:
             vacancy_skill = 'Skills not specified / Навыки не указаны'
         vacancy_list.append({'Publication Date': data_time,
@@ -97,7 +97,7 @@ async def catch_page(session: aiohttp.ClientSession, url: str) -> str:
 async def scouting(session: aiohttp.ClientSession, url: str):
     html = await catch_page(session, url)
     if not html:
-        return []
+        return [], []
     soup = BeautifulSoup(html, 'lxml')
     script = soup.find('script', attrs={'data-ssr-state': 'true'})
     if script is None:
